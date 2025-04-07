@@ -1,0 +1,35 @@
+<header>
+    <div class="header-content">
+        <button mat-button>
+        <mat-icon fontIcon="home" aria-label="Início"></mat-icon> Início
+        </button>
+
+        <button mat-button [matMenuTriggerFor]="belowMenu">
+        <mat-icon fontIcon="fact_check" aria-label="Simulados"></mat-icon> Simulados
+        </button>
+        <mat-menu #belowMenu="matMenu" yPosition="above">
+        <button mat-menu-item>Simulado 1</button>
+        <button mat-menu-item>Simulado 2</button>
+        </mat-menu>
+
+        <button mat-button>
+        <mat-icon fontIcon="person" aria-label="Conta"></mat-icon> Conta
+        </button>
+
+        <button mat-button>
+        <mat-icon fontIcon="group" aria-label="Conta"></mat-icon> Sobre nós
+        </button>
+    
+        <button mat-button [matMenuTriggerFor]="afterMenu">
+        <mat-icon fontIcon="settings" aria-label="Painel"></mat-icon> Painel
+        </button>
+
+        <mat-menu #afterMenu="matMenu" yPosition="above">
+        <button mat-menu-item>Consultar questões</button>
+        <button mat-menu-item>Cadastrar questão</button>
+        <button mat-menu-item>Editar questão</button>
+        <button mat-menu-item>Deletar questão</button>
+        </mat-menu>
+    </div>
+</header>
+  
