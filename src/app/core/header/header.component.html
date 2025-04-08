@@ -1,35 +1,45 @@
-<header>
-    <div class="header-content">
-        <button mat-button>
-        <mat-icon fontIcon="home" aria-label="Início"></mat-icon> Início
+<header class="header">
+    <!-- Botões Centralizados -->
+    <div class="menu-container">
+      <button mat-button>
+        <mat-icon>home</mat-icon> Início
+      </button>
+      
+      <button mat-button [matMenuTriggerFor]="simuladosMenu">
+        <mat-icon>fact_check</mat-icon> Simulados
+      </button>
+      
+      <button mat-button>
+        <mat-icon>person</mat-icon> Conta
+      </button>
+      
+      <button mat-button>
+        <mat-icon>group</mat-icon> Sobre nós
+      </button>
+      
+      <button mat-button [matMenuTriggerFor]="painelMenu">
+        <mat-icon>settings</mat-icon> Painel
+      </button>
+    </div>
+  
+    <!-- Botão Sair (Fixo na Direita) -->
+    <div class="logout-container">
+        <span class="divider">|</span>
+        <button mat-button class="logout-btn">
+            <mat-icon>logout</mat-icon> Sair
         </button>
-
-        <button mat-button [matMenuTriggerFor]="belowMenu">
-        <mat-icon fontIcon="fact_check" aria-label="Simulados"></mat-icon> Simulados
-        </button>
-        <mat-menu #belowMenu="matMenu" yPosition="above">
+    </div>
+  
+    <!-- Menus Dropdown -->
+    <mat-menu #simuladosMenu="matMenu">
         <button mat-menu-item>Simulado 1</button>
         <button mat-menu-item>Simulado 2</button>
-        </mat-menu>
-
-        <button mat-button>
-        <mat-icon fontIcon="person" aria-label="Conta"></mat-icon> Conta
-        </button>
-
-        <button mat-button>
-        <mat-icon fontIcon="group" aria-label="Conta"></mat-icon> Sobre nós
-        </button>
-    
-        <button mat-button [matMenuTriggerFor]="afterMenu">
-        <mat-icon fontIcon="settings" aria-label="Painel"></mat-icon> Painel
-        </button>
-
-        <mat-menu #afterMenu="matMenu" yPosition="above">
+    </mat-menu>
+  
+    <mat-menu #painelMenu="matMenu">
         <button mat-menu-item>Consultar questões</button>
         <button mat-menu-item>Cadastrar questão</button>
         <button mat-menu-item>Editar questão</button>
         <button mat-menu-item>Deletar questão</button>
-        </mat-menu>
-    </div>
-</header>
-  
+    </mat-menu>
+  </header>

@@ -1,64 +1,83 @@
-:host {
+.header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 60px;
-    background-color: #1976d2;
-    color: white;
+    height: 64px;
+    background: #1976d2;
     display: flex;
-    justify-content: center;
     align-items: center;
     padding: 0 16px;
-    z-index: 1000; 
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+  
+  /* CONTAINER PRINCIPAL - AJUSTE CHAVE AQUI */
+  .menu-container {
+    display: flex;
+    gap: 8px;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: center; /* Centraliza os botões */
+    padding-right: 100px; /* Compensa o botão Sair */
+  }
+  
+  .divider {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 20px;
+    font-weight: normal;
+    padding-right: 10px;
+  }
 
-    .header-content {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        flex-wrap: wrap;
-    }    
-}
-
-::ng-deep .mat-mdc-menu-item {
+  .logout-container {
+    position: absolute;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* BOTÃO SAIR */
+  .logout-btn {
+    right: 15px;
+    color: white !important;
+    margin-left: auto; /* Garante posicionamento à direita */
+  }
+  
+  /* ESTILOS DOS BOTÕES PRINCIPAIS */
+  .header .mat-mdc-button {
+    --mdc-text-button-label-text-color: white !important;
+    --mat-text-button-label-text-color: white !important;
+  }
+  
+  .header .mat-mdc-button .mat-icon {
+    color: white !important;
+  }
+  
+  /* HOVER E ESTADOS */
+  .header .mat-mdc-button:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  /* MENUS DROPDOWN */
+  ::ng-deep .mat-mdc-menu-panel {
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+    min-width: 180px !important;
+    background-color: white !important;
+  }
+  
+  ::ng-deep .mat-mdc-menu-item {
     background-color: white !important;
     color: black !important;
-  
-    &:hover {
-      background-color: #e0e0e0 !important;
-      color: black !important;
-    }
-}
-
-
-::ng-deep .mat-mdc-menu-panel {
-    padding: 0 !important;
-    margin: 0 !important;
-    box-shadow: none !important;
-}
-
-::ng-deep .mat-mdc-menu-content {
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-::ng-deep .mat-mdc-menu-item {
     padding: 0 16px !important;
-    min-height: 40px !important; // você pode ajustar esse valor
+    min-height: 40px !important;
     line-height: 40px !important;
-    margin: 0 !important;
-    box-sizing: border-box;
-}
-
-::ng-deep .mat-mdc-menu-item .mat-mdc-focus-indicator {
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-::ng-deep .mat-mdc-menu-item {
-    min-height: 32px !important;     // altura do item
-    line-height: 32px !important;
-    font-size: 13px !important;      // tamanho da fonte
-    padding: 0 12px !important;      // espaço lateral
-}
+  }
   
+  ::ng-deep .mat-mdc-menu-item:hover {
+    background-color: #f5f5f5 !important;
+  }
