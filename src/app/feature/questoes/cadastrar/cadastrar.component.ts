@@ -57,4 +57,9 @@ export class CadastrarComponent {
       alternativas.removeAt(alternativas.length - 1);
     }
   }
+
+  onWheel(event: WheelEvent): void {
+    (event.target as HTMLElement).blur(); // Remove o foco do input
+    event.preventDefault(); // Impede o scroll de alterar o valor
+  }
 }
