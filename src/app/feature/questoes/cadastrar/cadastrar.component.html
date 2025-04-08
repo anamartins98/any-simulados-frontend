@@ -2,7 +2,7 @@
     <h2 class="cadastro-titulo">Cadastro de questão</h2>
     <mat-divider class="cadastro-divider"></mat-divider>
   
-    <form [formGroup]="form" class="form-container" cdkScrollable>
+    <form [formGroup]="form" class="form-container" (ngSubmit)="onSubmit()" cdkScrollable>
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Digite aqui seu enunciado</mat-label>
         <textarea

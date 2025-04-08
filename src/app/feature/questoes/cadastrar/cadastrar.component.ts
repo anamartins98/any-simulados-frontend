@@ -62,4 +62,20 @@ export class CadastrarComponent {
     (event.target as HTMLElement).blur(); // Remove o foco do input
     event.preventDefault(); // Impede o scroll de alterar o valor
   }
+
+  async onSubmit(): Promise<void> {
+    if (this.form.valid) {
+      const dados = this.form.value;
+      console.log('Formulário enviado:', dados);
+      
+      await this.salvarQuestao(dados);
+    } else {
+      console.log('Formulário inválido: ');
+      this.form.markAllAsTouched();
+    }
+  }  
+
+  async salvarQuestao(dados: any) {
+    console.log(dados)
+  }
 }
