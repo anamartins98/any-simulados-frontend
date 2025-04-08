@@ -37,9 +37,7 @@
     </mat-menu>
   
     <mat-menu #painelMenu="matMenu">
-        <button mat-menu-item>Consultar questões</button>
-        <button mat-menu-item>Cadastrar questão</button>
-        <button mat-menu-item>Editar questão</button>
-        <button mat-menu-item>Deletar questão</button>
-    </mat-menu>
+        <button mat-menu-item [routerLink]="'/questoes/consultar'">Consultar questões</button>
+        <button mat-menu-item [routerLink]="'/questoes/cadastrar'">Cadastrar questão</button>
+        </mat-menu>
   </header>
