@@ -1,0 +1,66 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+  
+.form-field {
+    width: 600px;
+}
+  
+.form-field-sm {
+    width: 200px;
+}
+
+.btn-salvar {
+    background-color: #1976d2;
+    color: white;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: none;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+  
+    &:hover {
+      background-color: #0d47a1; // Azul mais escuro, mais contraste
+      transform: scale(1.03); // Leve aumento no hover
+    }
+  
+    &:disabled {
+      background-color: #90caf9;
+      cursor: not-allowed;
+      transform: none;
+    }
+}
+  
+.cadastro-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.1rem;
+}
+  
+.cadastro-titulo {
+    color: #1976d2;
+    font-size: 24px;
+    font-weight: bold;
+    align-self: flex-start;
+    margin-left: calc((100% - 600px) / 2);
+    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.5px;
+}
+  
+.cadastro-divider {
+    width: 100%;
+    max-width: 600px;
+    margin: 0.2rem auto 1.0rem auto;
+    border-top: 2px solid #ccc;
+}
+
+  

@@ -1,1 +1,36 @@
-<p>cadastrar works!</p>
+<div class="cadastro-wrapper">
+    <h2 class="cadastro-titulo">Cadastro de questão</h2>
+    <mat-divider class="cadastro-divider"></mat-divider>
+  
+    <form [formGroup]="form" class="form-container" cdkScrollable>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Digite aqui seu enunciado</mat-label>
+        <textarea
+          matInput
+          formControlName="enunciado"
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="10">
+        </textarea>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="form-field-sm">
+        <mat-label>Quantidade de alternativas</mat-label>
+        <input matInput type="number" formControlName="quantidade" />
+      </mat-form-field>
+  
+      <div formArrayName="alternativas" class="flex flex-col gap-4 w-full">
+        <div *ngFor="let alt of alternativas.controls; let i = index" [formGroupName]="i">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Alternativa {{ i + 1 }}</mat-label>
+            <input matInput formControlName="texto" />
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <button mat-flat-button color="primary" class="btn-salvar" type="submit" [disabled]="form.invalid">
+        Salvar
+      </button>
+    </form>
+  </div>
+  
