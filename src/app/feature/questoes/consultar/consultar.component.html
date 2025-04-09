@@ -15,7 +15,7 @@
             <button mat-icon-button (click)="editar(questao)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button (click)="excluir(questao)">
+            <button mat-icon-button (click)="mostrarModalExclusao(questao)">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
@@ -29,4 +29,23 @@
       </div>
     </div>
 </div>
-  
+
+<ng-container *ngIf="mostrarConfirmacaoExclusao">
+  <div class="backdrop"></div>
+  <div class="modal-confirmacao">
+    <h3 class="titulo-modal">Tem certeza que deseja excluir?</h3>
+    <p class="texto-modal">
+      Você está excluindo a questão '{{ questaoSelecionada?.enunciado }}'.<br />
+      Deseja continuar?
+    </p>
+
+    <div class="botoes">
+      <button class="botao cancelar" (click)="mostrarConfirmacaoExclusao = false">
+        Cancelar
+      </button>
+      <button class="botao excluir" (click)="excluir()">
+        Excluir
+      </button>
+    </div>
+  </div>
+</ng-container>

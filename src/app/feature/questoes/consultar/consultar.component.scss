@@ -84,4 +84,76 @@
 .icons button:hover mat-icon {
     color: white !important;
 }
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+  }
+  
+  .modal-confirmacao {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .modal-confirmacao h2,
+  .modal-confirmacao h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+  }
+  
+  .modal-confirmacao p {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+  
+  .botoes {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .botao {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .cancelar {
+    background-color: #eeeeee;
+    color: #333;
+  }
+  
+  .cancelar:hover {
+    background-color: #cccccc;
+  }
+  
+  .excluir {
+    background-color: #1976d2; /* Azul padrão */
+    color: white;
+  }
+  
+  .excluir:hover {
+    background-color: #0d47a1;
+    transform: scale(1.03);
+  }
   

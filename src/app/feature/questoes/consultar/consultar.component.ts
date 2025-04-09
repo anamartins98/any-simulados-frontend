@@ -24,6 +24,9 @@ interface Questao {
 export class ConsultarComponent {
   filtroEnunciado: string = '';
   questoes: Questao[] = [];
+  mostrarConfirmacaoExclusao: boolean = false;
+  questaoSelecionada: Questao | null = null;
+
 
   constructor(private apiService: ApiService) {}
 
@@ -48,8 +51,20 @@ export class ConsultarComponent {
     // pode navegar pro componente de editar passando o id
   }
 
-  excluir(questao: Questao) {
-    // confirma e chama o service pra remover
+  mostrarModalExclusao(questao: Questao) {
+    this.questaoSelecionada = questao;
+    this.mostrarConfirmacaoExclusao = true;
   }
 
+  excluir() {
+    if (!this.questaoSelecionada) return;
+  
+    const id = this.questaoSelecionada.id;
+  
+    this.apiService.delete('questoes', id).subscribe(() => {
+      this.questoes = this.questoes.filter(q => q.id !== id);
+      this.mostrarConfirmacaoExclusao = false;
+      this.questaoSelecionada = null;
+    });
+  }
 }
