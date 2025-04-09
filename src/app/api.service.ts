@@ -25,6 +25,10 @@ export class ApiService {
     return this.http.get<T>(`${this.API_BASE}/${endpoint}`, { params });
   }
 
+  getAll<T>(endpoint: string): Observable<T> {
+    return this.http.get<T>(`${this.API_BASE}/${endpoint}`);
+  }
+  
   getById<T>(endpoint: string, id: string | number): Observable<T> {
     return this.http.get<T>(`${this.API_BASE}/${endpoint}/${id}`);
   }

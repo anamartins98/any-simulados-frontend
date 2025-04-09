@@ -1,0 +1,60 @@
+.container {
+    padding: 24px;
+}
+  
+.consulta-titulo {
+    color: #1976d2;
+    font-size: 28px;
+    font-weight: 500;
+    align-self: flex-start;
+    margin-left: calc((100% - 600px) / 2);
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 0.5px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+  
+.consulta-divider {
+    width: 100%;
+    max-width: 600px;
+    margin: 0.2rem auto 1.0rem auto;
+    border-top: 2px solid #ccc;
+}
+  
+.search-field {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 24px;
+}
+  
+.questao-card {
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    position: relative;
+    background-color: #fafafa;
+}
+  
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 8px;
+}
+  
+.enunciado {
+    font-weight: 600;
+    max-width: 80%;
+}
+  
+.icons {
+    display: flex;
+    gap: 8px;
+}
+  
+.alternativas {
+    margin-top: 8px;
+}
+  

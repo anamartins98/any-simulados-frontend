@@ -1,1 +1,30 @@
-<p>consultar works!</p>
+<div class="container">
+    <h2 class="consulta-titulo">Questões</h2>
+    <mat-divider class="consulta-divider"></mat-divider>
+  
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Pesquisar por enunciado</mat-label>
+      <input matInput [(ngModel)]="filtroEnunciado" placeholder="Digite parte do enunciado" />
+    </mat-form-field>
+  
+    <div class="questao-card" *ngFor="let questao of questoesFiltradas()">
+      <div class="card-header">
+        <span class="enunciado">{{ questao.enunciado }}</span>
+        <div class="icons">
+          <button mat-icon-button color="primary" (click)="editar(questao)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="excluir(questao)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+  
+      <div class="alternativas">
+        <div *ngFor="let alt of questao.alternativas; index as i">
+          <strong>{{ getLetra(i) }}:</strong> {{ alt }}
+        </div>
+      </div>
+    </div>
+</div>
+  
