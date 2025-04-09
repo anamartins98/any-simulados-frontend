@@ -1,7 +1,7 @@
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule, ValidatorFn, AbstractControl } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -33,11 +33,13 @@ export class CadastrarComponent {
     this.form = this.fb.group({
       enunciado: ['', Validators.required],
       quantidade: [2, [Validators.required, Validators.min(2)]],
-      alternativas: this.fb.array([])
+      alternativas: this.fb.array([]),
+      respostaCorreta: ['', [Validators.required, this.letraValidaValidator()]]
     });
 
     this.form.get('quantidade')?.valueChanges.subscribe(qtd => {
       this.atualizarAlternativas(qtd);
+      this.form.get('respostaCorreta')?.updateValueAndValidity();
     });
 
     // Inicializa com 2 alternativas
@@ -93,7 +95,38 @@ export class CadastrarComponent {
       quantidade: dadosForm.quantidade,
       questaoAtiva: true,
       alternativas: dadosForm.alternativas.map((alt: any) => alt.texto),
-      respostaCorreta: 'C'
+      respostaCorreta: dadosForm.respostaCorreta.toUpperCase()
     };
+  }
+
+  getLetraAlternativa(index: number): string {
+    return String.fromCharCode(65 + index); // 65 = A, 66 = B, ...
+  }
+
+  getLetraAlternativaMaxima(): string {
+    const quantidade = this.form.get('quantidade')?.value;
+    if (!quantidade || quantidade < 1) return 'A';
+    return String.fromCharCode(65 + quantidade - 1);
   }  
+
+  letraValidaValidator(): ValidatorFn {
+    return (control: AbstractControl) => {
+      const letra = control.value?.toUpperCase();
+      const quantidade = this.form?.get('quantidade')?.value;
+
+      if (!letra || !quantidade) return null;
+
+      const codigoLetra = letra.charCodeAt(0);
+      const codigoMaximo = 65 + quantidade - 1; // 65 é "A"
+
+      const valido = codigoLetra >= 65 && codigoLetra <= codigoMaximo;
+
+      return valido ? null : { letraInvalida: true };
+    };
+  }
+
+  get respostaCorreta() {
+    return this.form.get('respostaCorreta');
+  }
+  
 }
