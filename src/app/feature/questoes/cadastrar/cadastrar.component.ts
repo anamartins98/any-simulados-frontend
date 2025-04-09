@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } fr
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ApiService } from '../../../api.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-cadastrar',
@@ -27,7 +29,7 @@ export class CadastrarComponent {
     return this.form.get('alternativas') as FormArray;
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private apiService: ApiService) {
     this.form = this.fb.group({
       enunciado: ['', Validators.required],
       quantidade: [2, [Validators.required, Validators.min(2)]],
@@ -66,9 +68,10 @@ export class CadastrarComponent {
   async onSubmit(): Promise<void> {
     if (this.form.valid) {
       const dados = this.form.value;
-      console.log('Formulário enviado:', dados);
+      const dadosTransformados = this.transformarDadosFormulario(dados);
+      console.log('Formulário enviado:', dadosTransformados);
       
-      await this.salvarQuestao(dados);
+      await this.salvarQuestao(dadosTransformados);
     } else {
       console.log('Formulário inválido: ');
       this.form.markAllAsTouched();
@@ -76,6 +79,21 @@ export class CadastrarComponent {
   }  
 
   async salvarQuestao(dados: any) {
-    console.log(dados)
+    try {
+      const response = await firstValueFrom(this.apiService.post('questoes', dados));
+      console.log('Questão salva com sucesso:', response);
+    } catch (error) {
+      console.error('Erro ao salvar a questão:', error);
+    }
   }
+
+  transformarDadosFormulario(dadosForm: any): any {
+    return {
+      enunciado: dadosForm.enunciado,
+      quantidade: dadosForm.quantidade,
+      questaoAtiva: true,
+      alternativas: dadosForm.alternativas.map((alt: any) => alt.texto),
+      respostaCorreta: 'C'
+    };
+  }  
 }
