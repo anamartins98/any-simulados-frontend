@@ -2,6 +2,16 @@
     <h2 class="cadastro-titulo">Cadastro de questão</h2>
     <mat-divider class="cadastro-divider"></mat-divider>
   
+    <div *ngIf="mensagemSucesso" class="alert-sucesso">
+      <mat-icon>check_circle</mat-icon>
+      Sua questão foi cadastrada com sucesso!
+    </div>
+
+    <div *ngIf="mensagemFalha" class="alert-falha">
+      <mat-icon>error</mat-icon>
+      Ops! Falha ao tentar cadastrar questão. Tente novamente mais tarde.
+    </div>
+
     <form [formGroup]="form" class="form-container" (ngSubmit)="onSubmit()" cdkScrollable>
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Digite aqui seu enunciado</mat-label>

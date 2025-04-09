@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ApiService } from '../../../api.service';
 import { firstValueFrom } from 'rxjs';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-cadastrar',
@@ -17,13 +18,16 @@ import { firstValueFrom } from 'rxjs';
     MatFormFieldModule,
     MatInputModule,
     TextFieldModule,
-    MatDividerModule
+    MatDividerModule,
+    MatIconModule
   ],
   templateUrl: './cadastrar.component.html',
   styleUrl: './cadastrar.component.scss'
 })
 export class CadastrarComponent {
   form: FormGroup;
+  mensagemSucesso: boolean = false;
+  mensagemFalha: boolean = false;
 
   get alternativas(): FormArray {
     return this.form.get('alternativas') as FormArray;
@@ -72,7 +76,6 @@ export class CadastrarComponent {
       const dados = this.form.value;
       const dadosTransformados = this.transformarDadosFormulario(dados);
       console.log('Formulário enviado:', dadosTransformados);
-      
       await this.salvarQuestao(dadosTransformados);
     } else {
       console.log('Formulário inválido: ');
@@ -84,8 +87,19 @@ export class CadastrarComponent {
     try {
       const response = await firstValueFrom(this.apiService.post('questoes', dados));
       console.log('Questão salva com sucesso:', response);
+
+      this.resetForm();
+      this.mensagemSucesso = true;
+      setTimeout(() => {
+        this.mensagemSucesso = false;
+      }, 5000);
+
     } catch (error) {
       console.error('Erro ao salvar a questão:', error);
+      this.mensagemFalha = true;
+      setTimeout(() => {
+        this.mensagemFalha = false;
+      }, 5000);
     }
   }
 
@@ -129,4 +143,23 @@ export class CadastrarComponent {
     return this.form.get('respostaCorreta');
   }
   
+  resetForm(): void {
+    this.form.patchValue({
+      enunciado: '',
+      respostaCorreta: ''
+    });
+  
+    const alternativas = this.form.get('alternativas') as FormArray;
+    while (alternativas.length > 0) {
+      alternativas.removeAt(0);
+    }
+  
+    // Sobe a quantidade para forçar recriação visual
+    this.form.get('quantidade')?.setValue(3);
+  
+    // Depois de um ciclo do JavaScript, volta pra 2 pra restaurar o padrão
+    setTimeout(() => {
+      this.form.get('quantidade')?.setValue(2);
+    }, 0);
+  }
 }
