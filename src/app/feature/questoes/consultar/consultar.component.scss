@@ -1,30 +1,35 @@
 .container {
     padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
   
 .consulta-titulo {
     color: #1976d2;
     font-size: 28px;
     font-weight: 500;
-    align-self: flex-start;
-    margin-left: calc((100% - 600px) / 2);
     font-family: 'Roboto', sans-serif;
     letter-spacing: 0.5px;
+    margin-bottom: 0.2rem;
+    text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+}
+  
+.consulta-wrapper {
+    width: 100%;
+    max-width: 800px;
 }
   
 .consulta-divider {
     width: 100%;
-    max-width: 600px;
-    margin: 0.2rem auto 1.0rem auto;
     border-top: 2px solid #ccc;
+    margin-bottom: 24px;
 }
   
 .search-field {
     width: 100%;
-    max-width: 600px;
     margin-bottom: 24px;
 }
   
@@ -52,6 +57,10 @@
 .icons {
     display: flex;
     gap: 8px;
+}
+  
+.icons button mat-icon {
+    color: #1976d2; /* cor azul do header */
 }
   
 .alternativas {
