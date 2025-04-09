@@ -15,12 +15,12 @@
       </mat-form-field>
   
       <div class="flex gap-4">
-        <mat-form-field appearance="outline" class="form-field-sm">
+        <mat-form-field style="margin-right: 100px;" appearance="outline" class="form-field-sm">
           <mat-label>Quantidade de alternativas</mat-label>
           <input matInput type="number" formControlName="quantidade" (wheel)="onWheel($event)" />
         </mat-form-field>
       
-        <mat-form-field appearance="outline" class="form-field-sm">
+        <mat-form-field appearance="outline" class="form-field-sm" [floatLabel]="'always'">
           <mat-label>Alternativa correta (letra)</mat-label>
           <input
             matInput
