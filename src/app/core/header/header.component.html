@@ -18,7 +18,7 @@
       </button>
       
       <button mat-button [matMenuTriggerFor]="painelMenu">
-        <mat-icon>settings</mat-icon> Painel
+        <mat-icon>settings</mat-icon> Administração
       </button>
     </div>
   
@@ -39,5 +39,8 @@
     <mat-menu #painelMenu="matMenu">
         <button mat-menu-item [routerLink]="'/questoes/consultar'">Consultar questões</button>
         <button mat-menu-item [routerLink]="'/questoes/cadastrar'">Cadastrar questão</button>
-        </mat-menu>
+        <button mat-menu-item [routerLink]="'/simulados/cadastrar'">Cadastrar simulado</button>
+        <button mat-menu-item [routerLink]="'/simulados/consultar'">Consultar simulados</button>
+        <button mat-menu-item [routerLink]="'/usuarios/gerenciar'">Gerenciar usuários</button>  
+      </mat-menu>
   </header>

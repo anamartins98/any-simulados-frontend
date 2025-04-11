@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConsultarComponent } from './consultar.component';
+import { LayoutBasicoComponent } from './layout-basico.component';
 
-describe('ConsultarComponent', () => {
-  let component: ConsultarComponent;
-  let fixture: ComponentFixture<ConsultarComponent>;
+describe('LayoutBasicoComponent', () => {
+  let component: LayoutBasicoComponent;
+  let fixture: ComponentFixture<LayoutBasicoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ConsultarComponent]
+      imports: [LayoutBasicoComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ConsultarComponent);
+    fixture = TestBed.createComponent(LayoutBasicoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

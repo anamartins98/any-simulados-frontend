@@ -8,9 +8,10 @@ import { MatInputModule } from '@angular/material/input';
 import { ApiService } from '../../../api.service';
 import { firstValueFrom } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
+import { LayoutBasicoComponent } from '../../../compartilhado/layout-basico/layout-basico.component';
 
 @Component({
-  selector: 'app-cadastrar',
+  selector: 'app-cadastro-questao',
   standalone: true,
   imports: [
     CommonModule,
@@ -18,13 +19,13 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     TextFieldModule,
-    MatDividerModule,
+    LayoutBasicoComponent,
     MatIconModule
   ],
-  templateUrl: './cadastrar.component.html',
-  styleUrl: './cadastrar.component.scss'
+  templateUrl: './cadastro-questao.component.html',
+  styleUrl: './cadastro-questao.component.scss'
 })
-export class CadastrarComponent {
+export class CadastroQuestaoComponent {
   form: FormGroup;
   mensagemSucesso: boolean = false;
   mensagemFalha: boolean = false;

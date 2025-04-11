@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
+import { LayoutBasicoComponent } from '../../../compartilhado/layout-basico/layout-basico.component';
 
 interface Questao {
   id: number;
@@ -16,12 +17,12 @@ interface Questao {
 
 
 @Component({
-  selector: 'app-consultar',
-  imports: [MatIconModule, CommonModule, MatFormFieldModule, FormsModule, MatDividerModule, MatInputModule],
-  templateUrl: './consultar.component.html',
-  styleUrl: './consultar.component.scss'
+  selector: 'app-consulta-questoes',
+  imports: [MatIconModule, CommonModule, MatFormFieldModule, FormsModule, LayoutBasicoComponent, MatInputModule],
+  templateUrl: './consulta-questoes.component.html',
+  styleUrl: './consulta-questoes.component.scss'
 })
-export class ConsultarComponent {
+export class ConsultaQuestoesComponent {
   filtroEnunciado: string = '';
   questoes: Questao[] = [];
   mostrarConfirmacaoExclusao: boolean = false;

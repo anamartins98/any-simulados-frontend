@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.container-titulo {
+    color: #1976d2;
+    font-size: 28px;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.2rem;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+  
+.container-wrapper {
+    width: 100%;
+    max-width: 800px;
+}
+  
+.container-divider {
+    width: 100%;
+    border-top: 2px solid #ccc;
+    margin-bottom: 24px;
+}
