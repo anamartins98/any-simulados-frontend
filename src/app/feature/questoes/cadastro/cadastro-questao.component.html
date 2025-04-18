@@ -9,6 +9,19 @@
     Ops! Falha ao tentar cadastrar questão. Tente novamente mais tarde.
   </div>
 
+  <div class="botao-gerar-questao">
+    <button
+      mat-flat-button
+      color="accent"
+      (click)="gerarQuestao()"
+      class="botao-ia"
+      matRipple
+    >
+      <mat-icon>auto_awesome</mat-icon>
+      Gerar questão com IA
+    </button>
+  </div>
+
   <form [formGroup]="form" class="form-container" (ngSubmit)="onSubmit()" cdkScrollable>
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Digite aqui seu enunciado</mat-label>
@@ -55,4 +68,38 @@
   </form>
 </app-layout-basico>
 
+<ng-container *ngIf="mostrarGeradorIA">
+  <div class="backdrop"></div>
+  <div class="modal-confirmacao">
+    <h3 class="titulo-modal">Gerar questão com IA</h3>
+
+    <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 16px;">
+      <mat-label>Assunto</mat-label>
+      <input matInput [(ngModel)]="assuntoQuestao" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 24px;">
+      <mat-label>Quantidade de alternativas</mat-label>
+      <input matInput type="number" [(ngModel)]="quantidadeAlternativas" min="2" />
+    </mat-form-field>
+
+    <div class="botoes">
+      <button class="botao cancelar" (click)="mostrarGeradorIA = false">
+        Cancelar
+      </button>
+      <button class="botao gerar" (click)="rodarPrompt()" [disabled]="rodandoPrompt">
+        <ng-container *ngIf="rodandoPrompt; else textoBotao">
+          <mat-progress-spinner
+            diameter="20"
+            mode="indeterminate"
+            color="primary"
+            strokeWidth="3"
+            style="vertical-align: middle;"
+          ></mat-progress-spinner>
+        </ng-container>
+        <ng-template #textoBotao>Gerar</ng-template>
+      </button>
+    </div>
+  </div>
+</ng-container>
     

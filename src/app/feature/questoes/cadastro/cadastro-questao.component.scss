@@ -78,3 +78,119 @@
     animation: fadeIn 0.3s ease;
   }
   
+  .botao-gerar-questao {
+    padding-bottom: 10px;
+  }
+  .botao-ia {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 6px 16px;
+    font-size: 14px;
+    text-transform: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+  
+    // Hover
+    &:hover {
+      background-color: #7caaf0; 
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+  
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+  
+  mat-icon {
+    font-size: 18px;
+  }
+  
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+  }
+  
+  .modal-confirmacao {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .modal-confirmacao h2,
+  .modal-confirmacao h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+  }
+  
+  .modal-confirmacao p {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+  
+  .botoes {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .botao {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .cancelar {
+    background-color: #eeeeee;
+    color: #333;
+  }
+  
+  .cancelar:hover {
+    background-color: #cccccc;
+  }
+  
+  .gerar {
+    background-color: #1976d2; /* Azul padrão */
+    color: white;
+  }
+  
+  .gerar:hover {
+    background-color: #0d47a1;
+    transform: scale(1.03);
+  }
+  
+
+  .overlay-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    z-index: 101;
+  }
+  

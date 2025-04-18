@@ -1,14 +1,14 @@
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule, ValidatorFn, AbstractControl } from '@angular/forms';
-import { MatDividerModule } from '@angular/material/divider';
+import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule, ValidatorFn, AbstractControl, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ApiService } from '../../../api.service';
 import { firstValueFrom } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { LayoutBasicoComponent } from '../../../compartilhado/layout-basico/layout-basico.component';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-cadastro-questao',
@@ -20,7 +20,9 @@ import { LayoutBasicoComponent } from '../../../compartilhado/layout-basico/layo
     MatInputModule,
     TextFieldModule,
     LayoutBasicoComponent,
-    MatIconModule
+    MatIconModule,
+    FormsModule,
+    MatProgressSpinner
   ],
   templateUrl: './cadastro-questao.component.html',
   styleUrl: './cadastro-questao.component.scss'
@@ -29,6 +31,10 @@ export class CadastroQuestaoComponent {
   form: FormGroup;
   mensagemSucesso: boolean = false;
   mensagemFalha: boolean = false;
+  mostrarGeradorIA: boolean = false;
+  assuntoQuestao: string = '';
+  quantidadeAlternativas: number = 4;
+  rodandoPrompt: boolean = false;
 
   get alternativas(): FormArray {
     return this.form.get('alternativas') as FormArray;
@@ -162,5 +168,70 @@ export class CadastroQuestaoComponent {
     setTimeout(() => {
       this.form.get('quantidade')?.setValue(2);
     }, 0);
+  }
+
+  gerarQuestao() {
+    this.mostrarGeradorIA = true;
+  }
+  
+  async rodarPrompt() {
+    this.rodandoPrompt = true;
+    const prompt = `Crie uma questão de múltipla escolha com ${this.quantidadeAlternativas} alternativas sobre o assunto '${this.assuntoQuestao}' e informe a alternativa correta. A resposta deverá ser no formato '(Enunciado aqui)<br>a) Texto<br>b) Texto 2<br>c) Texto 3<br>e assim por diante.<br><br>Alternativa correta: ?)`;
+    console.log(prompt);
+    try {
+      const response = await firstValueFrom(this.apiService.postIA('ia', prompt));
+      console.log(response);
+      this.preencherFormularioComTexto(response)
+
+    } catch (error) {
+      console.error('Erro ao chamar IA:', error);
+    }
+    
+    
+    this.zerarVariaveisIA();
+  }
+
+  private preencherFormularioComTexto(texto: string): void {
+    this.form.get('quantidade')?.setValue(this.quantidadeAlternativas);
+    
+    const linhas = texto.split('\n').filter(l => l.trim() !== '');
+  
+    const linhaResposta = linhas.find(l => l.toLowerCase().startsWith('alternativa correta'));
+    if (!linhaResposta) {
+      console.error('Resposta correta não encontrada no texto');
+      return;
+    }
+    const respostaCorretaMatch = linhaResposta.match(/Alternativa correta:\s*([a-zA-Z])\)/i);
+    const respostaCorreta = respostaCorretaMatch ? respostaCorretaMatch[1].toUpperCase() : '';
+
+    // Remove a linha da resposta correta para separar alternativas e enunciado
+    const linhasSemResposta = linhas.filter(l => l !== linhaResposta);
+  
+    // Identifica o índice da primeira alternativa
+    const indicePrimeiraAlternativa = linhasSemResposta.findIndex(l => /^[a-dA-D]\)/.test(l.trim()));
+  
+    // Divide entre enunciado e alternativas
+    const enunciado = linhasSemResposta.slice(0, indicePrimeiraAlternativa).join(' ').trim();
+    const alternativasBrutas = linhasSemResposta.slice(indicePrimeiraAlternativa);
+  
+    const alternativas = alternativasBrutas.map(alt => {
+      const texto = alt.replace(/^[a-dA-D]\)\s*/, '').trim();
+      return this.fb.group({ texto: [texto, Validators.required] });
+    });
+  
+    // Atualiza o formulário
+    this.form.setControl('alternativas', this.fb.array(alternativas));
+    this.form.patchValue({
+      enunciado,
+      quantidade: alternativas.length,
+      respostaCorreta
+    });
+  }
+  
+  zerarVariaveisIA() {
+    this.rodandoPrompt = false;
+    this.mostrarGeradorIA = false;
+    this.quantidadeAlternativas = 4;
+    this.assuntoQuestao = '';
   }
 }

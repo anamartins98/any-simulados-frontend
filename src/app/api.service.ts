@@ -15,6 +15,12 @@ export class ApiService {
     return this.http.post<T>(`${this.API_BASE}/${endpoint}`, body);
   }
 
+  postIA(endpoint: string, body: any): Observable<string> {
+    return this.http.post(`${this.API_BASE}/${endpoint}`, body, {
+      responseType: 'text'
+    });
+  }
+
   getWithQuery<T>(endpoint: string, queryParams: { [key: string]: any }): Observable<T> {
     let params = new HttpParams();
     Object.entries(queryParams).forEach(([key, value]) => {
